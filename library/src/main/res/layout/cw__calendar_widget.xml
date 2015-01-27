@@ -13,7 +13,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
         >
@@ -26,16 +26,21 @@
             android:id="@+id/cw__calendar_widget_button_backwards"
             />
 
-        <TextView
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:textStyle="bold"
             android:layout_weight="1"
-            android:gravity="center"
-            tools:text="January 2014"
-            android:id="@+id/cw__calendar_widget_title"
-            android:textAppearance="@style/TextAppearance.MaterialCalendarWidget.Header"
-            />
+            >
+
+            <Spinner
+                android:id="@+id/cw__calendar_widget_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                tools:listitem="@android:layout/simple_spinner_item"
+                />
+
+        </FrameLayout>
 
         <com.prolificinteractive.materialcalendarview.DirectionButton
             android:src="@drawable/cw__action_next"

@@ -12,10 +12,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.prolificinteractive.library.calendarwidget.R;
@@ -53,15 +57,23 @@ import java.util.Locale;
  */
 public class MaterialCalendarView extends FrameLayout {
 
-    private final TextView title;
+    private final Spinner title;
     private final DirectionButton buttonPast;
     private final DirectionButton buttonFuture;
     private final ViewPager pager;
     private final MonthPagerAdapter adapter;
+
     private CalendarDay currentMonth;
-    private DateFormat titleFormat = new SimpleDateFormat(
-        "MMMM yyyy", Locale.getDefault()
-    );
+
+    private final AdapterView.OnItemSelectedListener onTitleItemClickListener =
+        new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pager.setCurrentItem(position);
+            }
+
+            @Override public void onNothingSelected(AdapterView<?> parent) {}
+        };
 
     private final MonthView.Callbacks monthViewCallbacks = new MonthView.Callbacks() {
         @Override
@@ -119,12 +131,12 @@ public class MaterialCalendarView extends FrameLayout {
 
         LayoutInflater.from(getContext()).inflate(R.layout.cw__calendar_widget, this);
 
-        title = (TextView) findViewById(R.id.cw__calendar_widget_title);
+        title = (Spinner) findViewById(R.id.cw__calendar_widget_title);
         buttonPast = (DirectionButton) findViewById(R.id.cw__calendar_widget_button_backwards);
         buttonFuture = (DirectionButton) findViewById(R.id.cw__calendar_widget_button_forward);
         pager = (ViewPager) findViewById(R.id.cw__pager);
 
-        title.setOnClickListener(onClickListener);
+        title.setOnItemSelectedListener(onTitleItemClickListener);
         buttonPast.setOnClickListener(onClickListener);
         buttonFuture.setOnClickListener(onClickListener);
 
@@ -138,6 +150,8 @@ public class MaterialCalendarView extends FrameLayout {
                 page.setAlpha(position);
             }
         });
+
+        title.setAdapter(adapter);
 
         adapter.setCallbacks(monthViewCallbacks);
 
@@ -193,9 +207,7 @@ public class MaterialCalendarView extends FrameLayout {
     }
 
     private void updateUi() {
-        if(currentMonth != null) {
-            title.setText(titleFormat.format(currentMonth.getDate()));
-        }
+        title.setSelection(pager.getCurrentItem());
         buttonPast.setEnabled(canGoBack());
         buttonFuture.setEnabled(canGoForward());
     }
@@ -261,7 +273,7 @@ public class MaterialCalendarView extends FrameLayout {
      * @param resourceId The text appearance resource id.
      */
     public void setHeaderTextAppearance(int resourceId) {
-        title.setTextAppearance(getContext(), resourceId);
+        adapter.setHeaderTextAppearance(resourceId);
     }
 
     /**
@@ -510,7 +522,7 @@ public class MaterialCalendarView extends FrameLayout {
         return outValue.data;
     }
 
-    private static class MonthPagerAdapter extends PagerAdapter {
+    private static class MonthPagerAdapter extends PagerAdapter implements SpinnerAdapter {
 
         private static final int TAG_ITEM = R.id.cw__pager;
 
@@ -527,6 +539,7 @@ public class MaterialCalendarView extends FrameLayout {
         private CalendarDay minDate = null;
         private CalendarDay maxDate = null;
         private CalendarDay selectedDate = null;
+        private int headerTextAppearance;
 
         private MonthPagerAdapter(MaterialCalendarView view) {
             this.view = view;
@@ -636,6 +649,13 @@ public class MaterialCalendarView extends FrameLayout {
             }
         }
 
+        public void setHeaderTextAppearance(int taId) {
+            if(taId == 0) {
+                return;
+            }
+            this.headerTextAppearance = taId;
+        }
+
         public void setDateTextAppearance(int taId) {
             if(taId == 0) {
                 return;
@@ -740,6 +760,64 @@ public class MaterialCalendarView extends FrameLayout {
 
         protected int getWeekDayTextAppearance() {
             return weekDayTextAppearance == null ? 0 : weekDayTextAppearance;
+        }
+
+        /*
+         *
+         * Methods so we can use the same adapter for ViewPager and Spinner
+         *
+         */
+
+        private DateFormat titleFormat = new SimpleDateFormat(
+            "MMMM yyyy", Locale.getDefault()
+        );
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null) {
+                convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
+            }
+            TextView title = (TextView) convertView.findViewById(android.R.id.text1);
+            title.setGravity(Gravity.CENTER);
+            title.setTextAppearance(inflater.getContext(), headerTextAppearance);
+            title.setText(titleFormat.format(getItem(position).getDate()));
+            return convertView;
+        }
+
+        @Override
+        public View getDropDownView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null) {
+                convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+            }
+            TextView title = (TextView) convertView.findViewById(android.R.id.text1);
+            title.setTextAppearance(inflater.getContext(), headerTextAppearance);
+            title.setText(titleFormat.format(getItem(position).getDate()));
+            return convertView;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).hashCode();
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return 0;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            return 1;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return getCount() == 0;
         }
     }
 

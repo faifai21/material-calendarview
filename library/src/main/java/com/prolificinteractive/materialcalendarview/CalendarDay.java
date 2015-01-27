@@ -163,8 +163,8 @@ public final class CalendarDay implements Parcelable {
     @Override
     public int hashCode() {
         int result = year;
-        result = 31 * result + month;
-        result = 31 * result + day;
+        result = 100 * result + month;
+        result = 100 * result + day;
         return result;
     }
 
