@@ -7,7 +7,11 @@ import android.support.annotation.IntDef;
  */
 public class Constants {
     @IntDef(value = {NONE, SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY}, flag = true)
-    public @interface WeekDays{}
+    public @interface DisabledDays {}
+
+    @IntDef(value = {SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY})
+    public @interface WeekDays {}
+
     public static final int NONE = 0x00;
     public static final int SUNDAY = 0x01;
     public static final int MONDAY = 0x02;

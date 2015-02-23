@@ -34,6 +34,7 @@ available.
     app:weekDayTextAppearance="style"
     app:weekDayStyle="enum"
     app:disabledDays="flag"
+    app:startOfWeek="enum"
     />
 ```
 
@@ -62,7 +63,7 @@ Override the text appearance of the week day indicators.
 
 ### weekDayStyle
 
-Set the style of the week day. Can be `character` (first letter of the day, e.g. S, T, etc..), `abbreviated` (abbreviated forms of the days, e.g. Tue, Wed) or `full` (full versions of the day names, e.g. Sunday, Monday). `full` isn't recommended unless you reduce text size. Default is `abbreviated`.
+Set the style of the week day. Can be one of `character` (first letter of the day, e.g. S, T, etc..), `abbreviated` (abbreviated forms of the days, e.g. Tue, Wed) or `full` (full versions of the day names, e.g. Sunday, Monday). `full` isn't recommended unless you reduce text size. Default is `abbreviated`.
 
 ### dateTextAppearance
 
@@ -71,6 +72,10 @@ Override the text appearance of the dates.
 ### disabledDays
 
 Disables certain days in the week. Disabled days do not respond to clicks and are grayed out. Can be one or more of `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` or `none`. Default is `none`.
+
+### startOfWeek
+
+Set the first day of the week. Can be one of `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday` or `saturday`. Default is `sunday`.
 
 Contributing
 ============

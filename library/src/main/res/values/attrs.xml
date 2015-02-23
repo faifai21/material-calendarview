@@ -27,6 +27,15 @@
             <flag name="friday" value="0x20"/>
             <flag name="saturday" value="0x40"/>
         </attr>
+        <attr name="startOfWeek">
+            <enum name="sunday" value="0x01"/>
+            <enum name="monday" value="0x02"/>
+            <enum name="tuesday" value="0x04"/>
+            <enum name="wednesday" value="0x08"/>
+            <enum name="thursday" value="0x10"/>
+            <enum name="friday" value="0x20"/>
+            <enum name="saturday" value="0x40"/>
+        </attr>
     </declare-styleable>
 
 </resources>

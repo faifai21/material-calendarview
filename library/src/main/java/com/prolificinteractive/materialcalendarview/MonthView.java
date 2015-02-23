@@ -39,7 +39,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
     private boolean showOtherDates = false;
     @Constants.WeekDayStyle
     private int weekDayStyle = Constants.ABBREVIATED;
-    @Constants.WeekDays
+    @Constants.DisabledDays
     private int disabledDays = Constants.NONE;
 
 
@@ -91,8 +91,9 @@ class MonthView extends GridLayout implements View.OnClickListener {
         updateUi();
     }
 
-    public void setWeekDayStyle(@Constants.WeekDayStyle int style) {
+    public void setWeekDayStyle(@Constants.WeekDayStyle int style, @Constants.WeekDays int weekStart) {
         this.weekDayStyle = style;
+        this.firstDayOfWeek = getWeekDayFromConstant(weekStart);
         setFirstDayOfWeek(firstDayOfWeek);
     }
 
@@ -119,7 +120,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
         return tempWorkingCalendar;
     }
 
-    public void setDisabledDays(@Constants.WeekDays int days){
+    public void setDisabledDays(@Constants.DisabledDays int days){
         if(days == disabledDays)
             return;
         disabledDays = days;
@@ -187,6 +188,24 @@ class MonthView extends GridLayout implements View.OnClickListener {
         if((disabledDays & Constants.SATURDAY) != 0 && dayOfWeek == Calendar.SATURDAY)
             return true;
         return false;
+    }
+
+    private static int getWeekDayFromConstant(int constant){
+        if((constant & Constants.SUNDAY) != 0)
+            return Calendar.SUNDAY;
+        if((constant & Constants.MONDAY) != 0 )
+            return Calendar.MONDAY;
+        if((constant & Constants.TUESDAY) != 0 )
+            return Calendar.TUESDAY;
+        if((constant & Constants.WEDNESDAY) != 0 )
+            return Calendar.WEDNESDAY;
+        if((constant & Constants.THURSDAY) != 0)
+            return Calendar.THURSDAY;
+        if((constant & Constants.FRIDAY) != 0 )
+            return Calendar.FRIDAY;
+        if((constant & Constants.SATURDAY) != 0)
+            return Calendar.SATURDAY;
+        return Constants.NONE;
     }
 
     public void setCallbacks(Callbacks callbacks) {
