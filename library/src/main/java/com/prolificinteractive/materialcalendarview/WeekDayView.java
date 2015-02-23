@@ -24,8 +24,7 @@ class WeekDayView extends TextView {
         }
     }
 
-    public void setDayOfWeek(int dayOfWeek) {
-        String name = CalendarHelper.getDayOfWeekDisplayName(dayOfWeek);
-        setText(name);
+    public void setDayOfWeek(int dayOfWeek, @MaterialCalendarView.WeekDayStyle int style) {
+        setText(CalendarHelper.getDayOfWeekDisplayName(dayOfWeek, style));
     }
 }

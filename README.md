@@ -32,6 +32,7 @@ available.
     app:headerTextAppearance="style"
     app:dateTextAppearance="style"
     app:weekDayTextAppearance="style"
+    app:weekDayStyle="enum"
     />
 ```
 
@@ -57,6 +58,10 @@ Override the text appearance of the month-year indicator at the top.
 ### weekDayTextAppearance
 
 Override the text appearance of the week day indicators.
+
+### weekDayStyle
+
+Set the style of the week day. Can be `character` (first letter of the day, e.g. S, T, etc..), `abbreviated` (abbreviated forms of the days, e.g. Tue, Wed) or `full` (full versions of the day names, e.g. Sunday, Monday). `full` is isn't recommended unless you reduce text size. Default is `abbreviated`.
 
 ### dateTextAppearance
 

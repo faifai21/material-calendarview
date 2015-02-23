@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -42,12 +43,13 @@ import java.util.Locale;
  * {@linkplain OnDateChangedListener}
  * </p>
  *
- * @see R.styleable#MaterialCalendarView_arrowColor
- * @see R.styleable#MaterialCalendarView_selectionColor
- * @see R.styleable#MaterialCalendarView_headerTextAppearance
- * @see R.styleable#MaterialCalendarView_dateTextAppearance
- * @see R.styleable#MaterialCalendarView_weekDayTextAppearance
- * @see R.styleable#MaterialCalendarView_showOtherDates
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_arrowColor
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_selectionColor
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_headerTextAppearance
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_dateTextAppearance
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_weekDayTextAppearance
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_weekDayStyle
+ * @see com.prolificinteractive.materialcalendarview.R.styleable#MaterialCalendarView_showOtherDates
  */
 public class MaterialCalendarView extends FrameLayout {
 
@@ -58,6 +60,16 @@ public class MaterialCalendarView extends FrameLayout {
     private final MonthPagerAdapter adapter;
     private long currentMonth;
     private DateFormat titleFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+
+
+    @IntDef({CHARACTER, ABBREVIATED, FULL})
+    public @interface WeekDayStyle{};
+    // First letter of week day
+    public static final int CHARACTER = 0;
+    // Name of day abbreviated to three letters (e.g. Sat, Sun)
+    public static final int ABBREVIATED = 1;
+    // Full name of day
+    public static final int FULL = 2;
 
     private final MonthView.Callbacks monthViewCallbacks = new MonthView.Callbacks() {
         @Override
@@ -166,7 +178,12 @@ public class MaterialCalendarView extends FrameLayout {
             setShowOtherDates(a.getBoolean(
                     R.styleable.MaterialCalendarView_showOtherDates,
                     false
-            ), false);
+            ));
+
+            setWeekDayStyle(a.getInteger(
+                    R.styleable.MaterialCalendarView_weekDayStyle,
+                    ABBREVIATED
+            ));
 
         }
         catch (Exception e) {
@@ -328,7 +345,7 @@ public class MaterialCalendarView extends FrameLayout {
     }
 
     /**
-     * * @param minDate set the minimum selectable date in ms, 0 for no minimum
+     * @param minDate set the minimum selectable date in ms, 0 for no minimum
      */
     public void setMinimumDate(long minDate) {
         this.minDate = minDate;
@@ -336,7 +353,7 @@ public class MaterialCalendarView extends FrameLayout {
     }
 
     /**
-     * * @param minDate set the minimum selectable date, null for no maximum
+     * @param minDate set the minimum selectable date, null for no maximum
      */
     public void setMinimumDate(Date minDate) {
         setMinimumDate(minDate == null ? 0 : minDate.getTime());
@@ -358,7 +375,7 @@ public class MaterialCalendarView extends FrameLayout {
     }
 
     /**
-     * * @param maxDate set the maximum selectable date, null for no maximum
+     * @param maxDate set the maximum selectable date, null for no maximum
      */
     public void setMaximumDate(Date maxDate) {
         setMaximumDate(maxDate == null ? 0 : maxDate.getTime());
@@ -371,10 +388,17 @@ public class MaterialCalendarView extends FrameLayout {
      * This also controls showing dates outside of the min-max range.
      *
      * @param showOtherDates show other days, default is false
-     * @param forceUpdate whether or not to force an update in the UI
      */
-    public void setShowOtherDates(boolean showOtherDates, boolean forceUpdate) {
+    public void setShowOtherDates(boolean showOtherDates) {
         adapter.setShowOtherDates(showOtherDates);
+    }
+
+    /**
+     * Set style of week day name
+     * @param style format according to {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     */
+    public void setWeekDayStyle(@WeekDayStyle int style){
+        adapter.setWeekDayStyle(style);
     }
 
     /**
@@ -394,6 +418,7 @@ public class MaterialCalendarView extends FrameLayout {
         ss.minDate = getMinimumDate();
         ss.maxDate = getMaximumDate();
         ss.selectedDate = getSelectedDate();
+        ss.weekDayStyle = adapter.getWeekDayStyle();
         return ss;
     }
 
@@ -404,9 +429,10 @@ public class MaterialCalendarView extends FrameLayout {
         setSelectionColor(ss.color);
         setDateTextAppearance(ss.dateTextAppearance);
         setWeekDayTextAppearance(ss.weekDayTextAppearance);
-        setShowOtherDates(ss.showOtherDates, true);
+        setShowOtherDates(ss.showOtherDates);
         setRangeDates(ss.minDate, ss.maxDate);
         setSelectedDate(ss.selectedDate);
+        setWeekDayStyle(ss.weekDayStyle);
     }
 
     @Override
@@ -434,6 +460,7 @@ public class MaterialCalendarView extends FrameLayout {
         int color = 0;
         int dateTextAppearance = 0;
         int weekDayTextAppearance = 0;
+        @WeekDayStyle int weekDayStyle = ABBREVIATED;
         boolean showOtherDates = false;
         long minDate = 0;
         long  maxDate = 0;
@@ -449,6 +476,7 @@ public class MaterialCalendarView extends FrameLayout {
             out.writeInt(color);
             out.writeInt(dateTextAppearance);
             out.writeInt(weekDayTextAppearance);
+            out.writeInt(weekDayStyle);
             out.writeInt(showOtherDates ? 1 : 0);
             out.writeLong(minDate);
             out.writeLong(maxDate);
@@ -471,6 +499,7 @@ public class MaterialCalendarView extends FrameLayout {
             color = in.readInt();
             dateTextAppearance = in.readInt();
             weekDayTextAppearance = in.readInt();
+            weekDayStyle = in.readInt();
             showOtherDates = in.readInt() == 1;
             minDate = in.readLong();
             maxDate = in.readLong();
@@ -507,6 +536,7 @@ public class MaterialCalendarView extends FrameLayout {
         private long minDate = 0;
         private long maxDate = 0;
         private long selectedDate = 0;
+        @WeekDayStyle private int weekDayStyle = ABBREVIATED;
 
         private MonthPagerAdapter(MaterialCalendarView view) {
             this.inflater = LayoutInflater.from(view.getContext());
@@ -575,6 +605,7 @@ public class MaterialCalendarView extends FrameLayout {
             if(weekDayTextAppearance != null) {
                 monthView.setWeekDayTextAppearance(weekDayTextAppearance);
             }
+            monthView.setWeekDayStyle(weekDayStyle);
             container.addView(monthView);
             currentViews.add(monthView);
 
@@ -676,6 +707,14 @@ public class MaterialCalendarView extends FrameLayout {
             }
         }
 
+        public void setWeekDayStyle(@WeekDayStyle int style){
+            if(style == weekDayStyle)
+                return;
+            weekDayStyle = style;
+            for(MonthView monthView : currentViews) {
+                monthView.setWeekDayStyle(weekDayStyle);
+            }
+        }
 
         private long getValidSelectedDate(long date) {
             if(date == 0) {
@@ -706,6 +745,10 @@ public class MaterialCalendarView extends FrameLayout {
             return weekDayTextAppearance == null ? 0 : weekDayTextAppearance;
         }
 
+        @WeekDayStyle
+        protected int getWeekDayStyle() {
+            return weekDayStyle;
+        }
     }
 
 }

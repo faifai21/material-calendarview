@@ -12,6 +12,11 @@
 
         <attr name="showOtherDates" format="boolean"/>
 
+        <attr name="weekDayStyle">
+            <enum name="character" value="0"/>
+            <enum name="abbreviated" value="1"/>
+            <enum name="full" value="2"/>
+        </attr>
     </declare-styleable>
 
 </resources>

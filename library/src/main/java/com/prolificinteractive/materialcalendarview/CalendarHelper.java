@@ -49,6 +49,21 @@ public class CalendarHelper {
     }
 
     /**
+     * Get the name of the day formatted in a way according style (see {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     * @param dayOfWeek day of week as int
+     * @param style format of string according to {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     * @return name of day with the specified format
+     */
+    public synchronized static String getDayOfWeekDisplayName(int dayOfWeek, @MaterialCalendarView.WeekDayStyle int style){
+        cal.set(DAY_OF_WEEK, dayOfWeek);
+        if(style != MaterialCalendarView.CHARACTER) {
+            return cal.getDisplayName(DAY_OF_WEEK, style, Locale.getDefault());
+        }
+        else
+            return cal.getDisplayName(DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()).charAt(0) + "";
+    }
+
+    /**
      * Get month as an int
      * @param ms time in ms
      * @return month as an int

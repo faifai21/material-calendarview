@@ -10,6 +10,7 @@ import java.util.Date;
 
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.SHORT;
 import static java.util.Calendar.SUNDAY;
 
 /**
@@ -36,6 +37,8 @@ class MonthView extends GridLayout implements View.OnClickListener {
     private long maxDate = 0;
 
     private boolean showOtherDates = false;
+    @MaterialCalendarView.WeekDayStyle
+    private int weekDayStyle = SHORT;
 
     public MonthView(Context context) {
         this(context, null);
@@ -85,6 +88,11 @@ class MonthView extends GridLayout implements View.OnClickListener {
         updateUi();
     }
 
+    public void setWeekDayStyle(@MaterialCalendarView.WeekDayStyle int style) {
+        this.weekDayStyle = style;
+        setFirstDayOfWeek(firstDayOfWeek);
+    }
+
     public boolean getShowOtherDates() {
         return showOtherDates;
     }
@@ -113,7 +121,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
         long calendar  = calendarOfRecord;
         calendar = CalendarHelper.set(calendar, DAY_OF_WEEK, dayOfWeek);
         for(WeekDayView dayView : weekDayViews) {
-            dayView.setDayOfWeek(CalendarHelper.getDayOfWeek(calendar));
+            dayView.setDayOfWeek(CalendarHelper.getDayOfWeek(calendar), weekDayStyle);
             calendar = CalendarHelper.add(calendar, DATE, 1);
         }
     }
