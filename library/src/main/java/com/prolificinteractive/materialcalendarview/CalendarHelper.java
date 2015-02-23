@@ -153,4 +153,8 @@ public class CalendarHelper {
     public static boolean isBetween(long current, long min, long max){
         return (min == 0 && max == 0) || (current > min && current < max);
     }
+
+    public static boolean isSameDay(long firstMs, long secondMs){
+        return getDayOfMonth(firstMs) == getDayOfMonth(secondMs) && getMonth(firstMs) == getMonth(secondMs) && get(firstMs, YEAR) == get(secondMs, YEAR);
+    }
 }

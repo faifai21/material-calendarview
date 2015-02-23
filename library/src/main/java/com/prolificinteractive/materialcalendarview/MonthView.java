@@ -32,7 +32,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
     private long calendarOfRecord;
     private int firstDayOfWeek = SUNDAY;
 
-    private long selection = 0;
+    private long selection = new Date().getTime();
     private long minDate = 0;
     private long maxDate = 0;
 
@@ -137,11 +137,11 @@ class MonthView extends GridLayout implements View.OnClickListener {
         }
     }
 
-    public void set(long minDate, long maxDate, long date, long selected, boolean showOtherDates) {
+    public void set(long minDate, long maxDate, long date, long selectedDate, boolean showOtherDates) {
         this.minDate = minDate;
         this.maxDate = maxDate;
         calendarOfRecord = date;
-        selection = selected;
+        selection = selectedDate;
         this.showOtherDates = showOtherDates;
         updateUi();
     }
@@ -163,7 +163,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
         for(DayView dayView : monthDayViews) {
             dayView.setDay(calendar);
             dayView.setupSelection(showOtherDates, CalendarHelper.isBetween(calendar, minDate, maxDate), CalendarHelper.getMonth(calendar) == ourMonth, isDayDisabled(calendar));
-            dayView.setChecked(calendar == selection);
+            dayView.setChecked(CalendarHelper.isSameDay(calendar, selection));
             calendar = CalendarHelper.add(calendar, DATE, 1);
         }
         postInvalidate();

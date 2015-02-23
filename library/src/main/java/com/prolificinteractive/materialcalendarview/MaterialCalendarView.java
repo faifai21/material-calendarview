@@ -589,7 +589,7 @@ public class MaterialCalendarView extends FrameLayout {
         private Boolean showOtherDates = null;
         private long minDate = 0;
         private long maxDate = 0;
-        private long selectedDate = 0;
+        private long selectedDate = new Date().getTime();
         @Constants.WeekDayStyle private int weekDayStyle = Constants.ABBREVIATED;
         @Constants.DisabledDays
         private int disabledDays = Constants.NONE;

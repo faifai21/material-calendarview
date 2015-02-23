@@ -68,7 +68,7 @@ class DayView extends CheckedTextView {
         boolean enabled = inMonth && inRange && !disabled;
         setEnabled(enabled);
         // We'd like to show the disabled days as they're probably weekends
-        setVisibility(enabled || showOtherDates || (disabled && inMonth)? View.VISIBLE : View.INVISIBLE);
+        setVisibility(enabled || showOtherDates || (disabled && inMonth)? View.VISIBLE : View.GONE);
     }
 
     private static Drawable generateBackground(int color, int fadeTime) {
