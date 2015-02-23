@@ -33,6 +33,7 @@ available.
     app:dateTextAppearance="style"
     app:weekDayTextAppearance="style"
     app:weekDayStyle="enum"
+    app:disabledDays="flag"
     />
 ```
 
@@ -66,6 +67,10 @@ Set the style of the week day. Can be `character` (first letter of the day, e.g.
 ### dateTextAppearance
 
 Override the text appearance of the dates.
+
+### disabledDays
+
+Disables certain days in the week. Disabled days do not respond to clicks and are grayed out. Can be one or more of `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` or `none`. Default is `none`.
 
 Contributing
 ============

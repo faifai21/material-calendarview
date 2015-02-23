@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.GridLayout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.DAY_OF_WEEK;
-import static java.util.Calendar.SHORT;
 import static java.util.Calendar.SUNDAY;
 
 /**
@@ -37,8 +37,11 @@ class MonthView extends GridLayout implements View.OnClickListener {
     private long maxDate = 0;
 
     private boolean showOtherDates = false;
-    @MaterialCalendarView.WeekDayStyle
-    private int weekDayStyle = SHORT;
+    @Constants.WeekDayStyle
+    private int weekDayStyle = Constants.ABBREVIATED;
+    @Constants.WeekDays
+    private int disabledDays = Constants.NONE;
+
 
     public MonthView(Context context) {
         this(context, null);
@@ -88,7 +91,7 @@ class MonthView extends GridLayout implements View.OnClickListener {
         updateUi();
     }
 
-    public void setWeekDayStyle(@MaterialCalendarView.WeekDayStyle int style) {
+    public void setWeekDayStyle(@Constants.WeekDayStyle int style) {
         this.weekDayStyle = style;
         setFirstDayOfWeek(firstDayOfWeek);
     }
@@ -114,6 +117,13 @@ class MonthView extends GridLayout implements View.OnClickListener {
         }
         tempWorkingCalendar = CalendarHelper.add(tempWorkingCalendar, DATE, delta);
         return tempWorkingCalendar;
+    }
+
+    public void setDisabledDays(@Constants.WeekDays int days){
+        if(days == disabledDays)
+            return;
+        disabledDays = days;
+        updateUi();
     }
 
     public void setFirstDayOfWeek(int dayOfWeek) {
@@ -151,11 +161,32 @@ class MonthView extends GridLayout implements View.OnClickListener {
         long calendar = resetAndGetWorkingCalendar();
         for(DayView dayView : monthDayViews) {
             dayView.setDay(calendar);
-            dayView.setupSelection(showOtherDates, CalendarHelper.isBetween(calendar, minDate, maxDate), CalendarHelper.getMonth(calendar) == ourMonth);
+            dayView.setupSelection(showOtherDates, CalendarHelper.isBetween(calendar, minDate, maxDate), CalendarHelper.getMonth(calendar) == ourMonth, isDayDisabled(calendar));
             dayView.setChecked(calendar == selection);
             calendar = CalendarHelper.add(calendar, DATE, 1);
         }
         postInvalidate();
+    }
+
+    private boolean isDayDisabled(long timeInMs){
+        final int dayOfWeek = CalendarHelper.getDayOfWeek(timeInMs);
+        if(disabledDays == Constants.NONE)
+            return false;
+        if((disabledDays & Constants.SUNDAY) != 0 && dayOfWeek == Calendar.SUNDAY)
+            return true;
+        if((disabledDays & Constants.MONDAY) != 0 && dayOfWeek == Calendar.MONDAY)
+            return true;
+        if((disabledDays & Constants.TUESDAY) != 0 && dayOfWeek == Calendar.TUESDAY)
+            return true;
+        if((disabledDays & Constants.WEDNESDAY) != 0 && dayOfWeek == Calendar.WEDNESDAY)
+            return true;
+        if((disabledDays & Constants.THURSDAY) != 0 && dayOfWeek == Calendar.THURSDAY)
+            return true;
+        if((disabledDays & Constants.FRIDAY) != 0 && dayOfWeek == Calendar.FRIDAY)
+            return true;
+        if((disabledDays & Constants.SATURDAY) != 0 && dayOfWeek == Calendar.SATURDAY)
+            return true;
+        return false;
     }
 
     public void setCallbacks(Callbacks callbacks) {

@@ -27,6 +27,8 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 /**
  * <p>
  * This class is a calendar widget for displaying and selecting dates.
@@ -60,16 +62,6 @@ public class MaterialCalendarView extends FrameLayout {
     private final MonthPagerAdapter adapter;
     private long currentMonth;
     private DateFormat titleFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
-
-
-    @IntDef({CHARACTER, ABBREVIATED, FULL})
-    public @interface WeekDayStyle{};
-    // First letter of week day
-    public static final int CHARACTER = 0;
-    // Name of day abbreviated to three letters (e.g. Sat, Sun)
-    public static final int ABBREVIATED = 1;
-    // Full name of day
-    public static final int FULL = 2;
 
     private final MonthView.Callbacks monthViewCallbacks = new MonthView.Callbacks() {
         @Override
@@ -182,7 +174,12 @@ public class MaterialCalendarView extends FrameLayout {
 
             setWeekDayStyle(a.getInteger(
                     R.styleable.MaterialCalendarView_weekDayStyle,
-                    ABBREVIATED
+                    Constants.ABBREVIATED
+            ));
+
+            setDisabledDays(a.getInteger(
+                    R.styleable.MaterialCalendarView_disabledDays,
+                    Constants.NONE
             ));
 
         }
@@ -395,10 +392,18 @@ public class MaterialCalendarView extends FrameLayout {
 
     /**
      * Set style of week day name
-     * @param style format according to {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     * @param style format according to {@link com.prolificinteractive.materialcalendarview.Constants.WeekDayStyle}
      */
-    public void setWeekDayStyle(@WeekDayStyle int style){
+    public void setWeekDayStyle(@Constants.WeekDayStyle int style){
         adapter.setWeekDayStyle(style);
+    }
+
+    /**
+     * Disable certain days of the week.
+     * @param disabledDays One or more week days (OR'd together) as specified in {@link com.prolificinteractive.materialcalendarview.Constants.WeekDays}
+     */
+    public void setDisabledDays(@Constants.WeekDays int disabledDays){
+        adapter.setDisabledDays(disabledDays);
     }
 
     /**
@@ -414,6 +419,7 @@ public class MaterialCalendarView extends FrameLayout {
         ss.color = getSelectionColor();
         ss.dateTextAppearance = adapter.getDateTextAppearance();
         ss.weekDayTextAppearance = adapter.getWeekDayTextAppearance();
+        ss.disabledDays = adapter.getDisabledDays();
         ss.showOtherDates = getShowOtherDates();
         ss.minDate = getMinimumDate();
         ss.maxDate = getMaximumDate();
@@ -429,6 +435,7 @@ public class MaterialCalendarView extends FrameLayout {
         setSelectionColor(ss.color);
         setDateTextAppearance(ss.dateTextAppearance);
         setWeekDayTextAppearance(ss.weekDayTextAppearance);
+        setDisabledDays(ss.disabledDays);
         setShowOtherDates(ss.showOtherDates);
         setRangeDates(ss.minDate, ss.maxDate);
         setSelectedDate(ss.selectedDate);
@@ -460,7 +467,8 @@ public class MaterialCalendarView extends FrameLayout {
         int color = 0;
         int dateTextAppearance = 0;
         int weekDayTextAppearance = 0;
-        @WeekDayStyle int weekDayStyle = ABBREVIATED;
+        @Constants.WeekDayStyle int weekDayStyle = Constants.ABBREVIATED;
+        @Constants.WeekDays int disabledDays = Constants.NONE;
         boolean showOtherDates = false;
         long minDate = 0;
         long  maxDate = 0;
@@ -477,6 +485,7 @@ public class MaterialCalendarView extends FrameLayout {
             out.writeInt(dateTextAppearance);
             out.writeInt(weekDayTextAppearance);
             out.writeInt(weekDayStyle);
+            out.writeInt(disabledDays);
             out.writeInt(showOtherDates ? 1 : 0);
             out.writeLong(minDate);
             out.writeLong(maxDate);
@@ -500,6 +509,7 @@ public class MaterialCalendarView extends FrameLayout {
             dateTextAppearance = in.readInt();
             weekDayTextAppearance = in.readInt();
             weekDayStyle = in.readInt();
+            disabledDays = in.readInt();
             showOtherDates = in.readInt() == 1;
             minDate = in.readLong();
             maxDate = in.readLong();
@@ -536,7 +546,8 @@ public class MaterialCalendarView extends FrameLayout {
         private long minDate = 0;
         private long maxDate = 0;
         private long selectedDate = 0;
-        @WeekDayStyle private int weekDayStyle = ABBREVIATED;
+        @Constants.WeekDayStyle private int weekDayStyle = Constants.ABBREVIATED;
+        @Constants.WeekDays private int disabledDays = Constants.NONE;
 
         private MonthPagerAdapter(MaterialCalendarView view) {
             this.inflater = LayoutInflater.from(view.getContext());
@@ -606,6 +617,7 @@ public class MaterialCalendarView extends FrameLayout {
                 monthView.setWeekDayTextAppearance(weekDayTextAppearance);
             }
             monthView.setWeekDayStyle(weekDayStyle);
+            monthView.setDisabledDays(disabledDays);
             container.addView(monthView);
             currentViews.add(monthView);
 
@@ -707,12 +719,21 @@ public class MaterialCalendarView extends FrameLayout {
             }
         }
 
-        public void setWeekDayStyle(@WeekDayStyle int style){
+        public void setWeekDayStyle(@Constants.WeekDayStyle int style){
             if(style == weekDayStyle)
                 return;
             weekDayStyle = style;
             for(MonthView monthView : currentViews) {
                 monthView.setWeekDayStyle(weekDayStyle);
+            }
+        }
+
+        public void setDisabledDays(@Constants.WeekDays int days){
+            if(days == disabledDays)
+                return;
+            disabledDays = days;
+            for(MonthView monthView : currentViews) {
+                monthView.setDisabledDays(disabledDays);
             }
         }
 
@@ -745,9 +766,14 @@ public class MaterialCalendarView extends FrameLayout {
             return weekDayTextAppearance == null ? 0 : weekDayTextAppearance;
         }
 
-        @WeekDayStyle
+        @Constants.WeekDayStyle
         protected int getWeekDayStyle() {
             return weekDayStyle;
+        }
+
+        @Constants.WeekDays
+        protected int getDisabledDays(){
+            return disabledDays;
         }
     }
 

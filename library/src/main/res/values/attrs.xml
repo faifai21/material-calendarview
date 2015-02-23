@@ -17,6 +17,16 @@
             <enum name="abbreviated" value="1"/>
             <enum name="full" value="2"/>
         </attr>
+        <attr name="disabledDays">
+            <flag name="none" value="0x00"/>
+            <flag name="sunday" value="0x01"/>
+            <flag name="monday" value="0x02"/>
+            <flag name="tuesday" value="0x04"/>
+            <flag name="wednesday" value="0x08"/>
+            <flag name="thursday" value="0x10"/>
+            <flag name="friday" value="0x20"/>
+            <flag name="saturday" value="0x40"/>
+        </attr>
     </declare-styleable>
 
 </resources>

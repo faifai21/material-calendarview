@@ -64,8 +64,8 @@ class DayView extends CheckedTextView {
         super.setEnabled(enabled);
     }
 
-    protected void setupSelection(boolean showOtherDates, boolean inRange, boolean inMonth) {
-        boolean enabled = inMonth && inRange;
+    protected void setupSelection(boolean showOtherDates, boolean inRange, boolean inMonth, boolean disabled) {
+        boolean enabled = inMonth && inRange && !disabled;
         setEnabled(enabled);
         setVisibility(enabled || showOtherDates ? View.VISIBLE : View.INVISIBLE);
     }

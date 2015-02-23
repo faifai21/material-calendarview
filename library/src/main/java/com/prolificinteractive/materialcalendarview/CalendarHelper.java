@@ -49,14 +49,14 @@ public class CalendarHelper {
     }
 
     /**
-     * Get the name of the day formatted in a way according style (see {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     * Get the name of the day formatted in a way according style (see {@link com.prolificinteractive.materialcalendarview.Constants.WeekDayStyle}
      * @param dayOfWeek day of week as int
-     * @param style format of string according to {@link com.prolificinteractive.materialcalendarview.MaterialCalendarView.WeekDayStyle}
+     * @param style format of string according to {@link com.prolificinteractive.materialcalendarview.Constants.WeekDayStyle}
      * @return name of day with the specified format
      */
-    public synchronized static String getDayOfWeekDisplayName(int dayOfWeek, @MaterialCalendarView.WeekDayStyle int style){
+    public synchronized static String getDayOfWeekDisplayName(int dayOfWeek, @Constants.WeekDayStyle int style){
         cal.set(DAY_OF_WEEK, dayOfWeek);
-        if(style != MaterialCalendarView.CHARACTER) {
+        if(style != Constants.CHARACTER) {
             return cal.getDisplayName(DAY_OF_WEEK, style, Locale.getDefault());
         }
         else
