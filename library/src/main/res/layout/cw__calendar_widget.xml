@@ -13,7 +13,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
         >
@@ -47,10 +47,10 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
+    <com.prolificinteractive.materialcalendarview.WrapContentViewPager
         android:id="@+id/cw__pager"
         android:layout_width="@dimen/cw__default_month_width"
-        android:layout_height="@dimen/cw__default_month_height"
+        android:layout_height="wrap_content"
         />
 
 </LinearLayout>

@@ -3,264 +3,299 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_gravity="center"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.WeekDayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
-    <com.prolificinteractive.materialcalendarview.WeekDayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
 
     <!-- Week 1 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
 
     <!-- Week 2 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
-
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
     <!-- Week 3 -->
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
     <!-- Week 4 -->
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
     <!-- Week 5 -->
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
     <!-- Week 6 -->
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
 
-    <com.prolificinteractive.materialcalendarview.DayView
-        android:layout_width="@dimen/cw__default_day_size"
-        android:layout_height="@dimen/cw__default_day_size"
-        />
+        <com.prolificinteractive.materialcalendarview.DayView
+            android:layout_width="@dimen/cw__default_day_size"
+            android:layout_height="@dimen/cw__default_day_size"
+            />
+    </LinearLayout>
 
 </com.prolificinteractive.materialcalendarview.MonthView>

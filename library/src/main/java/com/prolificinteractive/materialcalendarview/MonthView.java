@@ -3,7 +3,8 @@ package com.prolificinteractive.materialcalendarview;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.GridLayout;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +18,7 @@ import static java.util.Calendar.SUNDAY;
  * Display a month of {@linkplain com.prolificinteractive.materialcalendarview.DayView}s and
  * seven {@linkplain com.prolificinteractive.materialcalendarview.WeekDayView}s.
  */
-class MonthView extends GridLayout implements View.OnClickListener {
+class MonthView extends LinearLayout implements View.OnClickListener {
 
     public static interface Callbacks {
 
@@ -50,9 +51,6 @@ class MonthView extends GridLayout implements View.OnClickListener {
     public MonthView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        setColumnCount(7);
-        setRowCount(7);
-
         setClipChildren(false);
         setClipToPadding(false);
     }
@@ -62,13 +60,17 @@ class MonthView extends GridLayout implements View.OnClickListener {
         super.onFinishInflate();
         int children = getChildCount();
         for(int i = 0; i < children; i++) {
-            View child = getChildAt(i);
-            if(child instanceof WeekDayView) {
-                weekDayViews.add((WeekDayView) child);
-            } else if(child instanceof DayView) {
-                monthDayViews.add((DayView) child);
-                child.setOnClickListener(this);
+            LinearLayout row = (LinearLayout) getChildAt(i);
+            for(int j = 0; j < row.getChildCount(); j++){
+                View child = row.getChildAt(j);
+                if(child instanceof WeekDayView) {
+                    weekDayViews.add((WeekDayView) child);
+                } else if(child instanceof DayView) {
+                    monthDayViews.add((DayView) child);
+                    child.setOnClickListener(this);
+                }
             }
+
         }
         setFirstDayOfWeek(firstDayOfWeek);
         setSelectedDate(new Date().getTime());
@@ -166,7 +168,23 @@ class MonthView extends GridLayout implements View.OnClickListener {
             dayView.setChecked(CalendarHelper.isSameDay(calendar, selection));
             calendar = CalendarHelper.add(calendar, DATE, 1);
         }
+        for(int i = getChildCount() - 1; i >= 0; i--){
+            if(shouldRowBeHidden((ViewGroup) getChildAt(i)))
+                getChildAt(i).setVisibility(View.GONE);
+            else
+                getChildAt(i).setVisibility(View.VISIBLE);
+        }
         postInvalidate();
+    }
+
+
+    private boolean shouldRowBeHidden(ViewGroup l){
+        final int childCount = l.getChildCount();
+        for(int i = 0; i < childCount; i++){
+            if(l.getChildAt(i).getVisibility() == VISIBLE)
+                return false;
+        }
+        return true;
     }
 
     private boolean isDayDisabled(long timeInMs){
@@ -232,4 +250,5 @@ class MonthView extends GridLayout implements View.OnClickListener {
             }
         }
     }
+
 }

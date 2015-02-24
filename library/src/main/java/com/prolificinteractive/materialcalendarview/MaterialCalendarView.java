@@ -55,7 +55,7 @@ public class MaterialCalendarView extends FrameLayout {
     private final TextView title;
     private final DirectionButton buttonPast;
     private final DirectionButton buttonFuture;
-    private final ViewPager pager;
+    private final WrapContentViewPager pager;
     private final MonthPagerAdapter adapter;
     private long currentMonth;
     private DateFormat titleFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
@@ -119,7 +119,7 @@ public class MaterialCalendarView extends FrameLayout {
         title = (TextView) findViewById(R.id.cw__calendar_widget_title);
         buttonPast = (DirectionButton) findViewById(R.id.cw__calendar_widget_button_backwards);
         buttonFuture = (DirectionButton) findViewById(R.id.cw__calendar_widget_button_forward);
-        pager = (ViewPager) findViewById(R.id.cw__pager);
+        pager = (WrapContentViewPager) findViewById(R.id.cw__pager);
 
         title.setOnClickListener(onClickListener);
         buttonPast.setOnClickListener(onClickListener);
